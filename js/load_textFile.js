@@ -14,5 +14,6 @@
        } else {
           //alert("Failed to load file");
        }
-    chrome.extension.sendRequest(payload, function(response) {});
+    //научиться передавать текст injected.js
+   //chrome.extension.sendRequest(payload, function(response) {});
 }

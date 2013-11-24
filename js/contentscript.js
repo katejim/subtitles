@@ -10,14 +10,15 @@ if (matches.length>0) {
     count: matches.length    // Pass the number of matches back.
   };
 
-
+    //injected code
   $.get(chrome.extension.getURL('/js/injected.js'),
     function(data) {
         var script = document.createElement("script");
         script.setAttribute("type", "text/javascript");
         script.innerHTML = data;
         document.getElementsByTagName("head")[0].appendChild(script);
-        document.getElementsByTagName("body")[0].setAttribute("onLoad", "injected_main();");
+        //показывает время в секундах при паузе
+        document.getElementsByTagName("video")[0].setAttribute("onpause", "injected_main();");
     }
   );
 
