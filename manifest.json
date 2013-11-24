@@ -1,9 +1,9 @@
 {
-  "name" : "SandwichBar",
+  "name" : "Subtitles",
   "version" : "1.0.1",
   "description" : "Shows an infobar on pages which contain the word 'sandwich'",
   "background" : {
-    "scripts": ["background.js"]
+    "scripts": ["js/background.js"]
   },
   "permissions" : [ "infobars" ],
   "icons" : {
@@ -14,10 +14,13 @@
   "content_scripts" : [
     {
       "matches" : [ "http://*/*" ],
-      "js" : [ "contentscript.js" ],
+      "js" : [  "js/jquery.js", "js/contentscript.js" ],
       "run_at" : "document_idle",
       "all_frames" : false
     }
+  ],
+   "web_accessible_resources": [
+    "js/injected.js"
   ],
   "manifest_version": 2
 }

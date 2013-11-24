@@ -6,6 +6,7 @@
 -->
 <html>
   <head>
+
     <style>
       html {
         height: 40px;
@@ -28,7 +29,9 @@
     <div id="wrap">
       The tad  <em> video </em> appears <em id="count">X</em> times on this
       page.
+      <input type="file" onchange="handle_files(this.files)">
     </div>
-    <script src="infobar.js"></script>
+    <script src="js/infobar.js"></script>
+    <script src="js/loadSubs.js"></script>
   </body>
 </html>
