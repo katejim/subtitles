@@ -18,7 +18,7 @@ if (matches.length>0) {
         script.innerHTML = data;
         document.getElementsByTagName("head")[0].appendChild(script);
         //показывает время в секундах при паузе
-        document.getElementsByTagName("video")[0].setAttribute("onpause", "injected_main();");
+        document.getElementsByTagName("video")[0].setAttribute("onpause", "setupMessageButton();");
     }
   );
 
