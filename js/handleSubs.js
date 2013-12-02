@@ -1,9 +1,7 @@
 /**
  * Created by KateKate on 24.11.13.
  */
-<script>
-
-(function(_global) {
+/*function(_global) {
 	var captions = [];
 	var video;
 	var output;
@@ -50,6 +48,5 @@
 
 	// hide transcript div when scripting is enabled
 	document.write('<style>#transcript{display:none}</style>');
-})(this);
+})(this);*/
 
-</script>
