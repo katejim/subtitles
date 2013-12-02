@@ -28,9 +28,8 @@ function injected_main() {
 function createMessage(title, body) {
   var container = document.createElement('div')
   container.innerHTML = '<div> \
-    <div>'+title+'</div> \
+    <div> <p>'+title+' </p></div> \
     <div >'+body+'</div> \
-    <input  type="button" value="OK"/> \
   </div>'
   return container.firstChild
 }
@@ -38,21 +37,33 @@ function createMessage(title, body) {
 function positionMessage(elem) {
 
   var v = document.querySelector('video');
-  var width = v.offsetWidth;
+  var videoRectangle =v.getBoundingClientRect()
+  var videoTop =  videoRectangle.top
+  var videoBottom =  videoRectangle.bottom
+  var videoLeft =  videoRectangle.left
+  var videoRight =  videoRectangle.right
+    alert(videoBottom  - videoTop)
+     alert(videoLeft)
    var scroll = document.documentElement.scrollTop || document.body.scrollTop
-    alert(scroll)
+
   //alert(width)
   elem.style.position = 'absolute'
 
-  var scroll = document.documentElement.scrollTop || document.body.scrollTop
-  elem.style.top = scroll + 200 + 'px'
+  elem.style.top =  videoBottom -30 + 'px'
   //elem.style.width =width + 'px'
   elem.style.color = 'red'
-  elem.style.left = Math.floor(document.body.clientWidth/2) - 150 + 'px'
+  elem.style.left = videoLeft + Math.round((videoRight-videoLeft)/15) + scroll+ 'px'
+  elem.style.right = videoRight - Math.round((videoRight-videoLeft)/15) + 'px'
   /*elem.style.width = width + scroll + 'px'
   elem.style.position = 'relative'
   elem.style.margin = 'auto'
   */
+  elem.textAlign = 'center'
+  elem.fontFamily = 'sans-serif'
+  elem.fontWeight =  'bold'
+  elem.textShadow = 'black 1px 1px 3px'
+  elem.paddingBottom = '.5em'
+
 }
 function addCloseOnClick(messageElem) {
 
@@ -65,7 +76,7 @@ function addCloseOnClick(messageElem) {
 }
 
 function setupMessageButton() {
-   title = "hey"
+   title = "heyrettttrretertertertertertreterttr"
    body = "friend"
 
   // создать
@@ -75,8 +86,10 @@ function setupMessageButton() {
   positionMessage(messageElem)
 
   // добавить обработчик на закрытие
-  addCloseOnClick(messageElem)
+  //addCloseOnClick(messageElem)
 
   // вставить в документ
+ // video = document.querySelector('video')
   document.body.appendChild(messageElem)
+
 }
