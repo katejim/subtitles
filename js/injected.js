@@ -25,44 +25,33 @@ function injected_main() {
 
 }
 
-function createMessage(title, body) {
+function createMessage(title) {
   var container = document.createElement('div')
-  container.innerHTML = '<div> \
-    <div> <p>'+title+' </p></div> \
-    <div >'+body+'</div> \
+
+  container.innerHTML = '<div  style= "width: 800px; height = 600px; " > \
+    <p style= "textAlign = center;" >'+title+' </p> \
   </div>'
+
   return container.firstChild
 }
 
 function positionMessage(elem) {
-
   var v = document.querySelector('video');
   var videoRectangle =v.getBoundingClientRect()
   var videoTop =  videoRectangle.top
   var videoBottom =  videoRectangle.bottom
   var videoLeft =  videoRectangle.left
-  var videoRight =  videoRectangle.right
-    alert(videoBottom  - videoTop)
-     alert(videoLeft)
+  var videoRight =  videoRectangle.rightac
+
+
    var scroll = document.documentElement.scrollTop || document.body.scrollTop
 
   //alert(width)
-  elem.style.position = 'absolute'
 
-  elem.style.top =  videoBottom -30 + 'px'
-  //elem.style.width =width + 'px'
-  elem.style.color = 'red'
-  elem.style.left = videoLeft + Math.round((videoRight-videoLeft)/15) + scroll+ 'px'
-  elem.style.right = videoRight - Math.round((videoRight-videoLeft)/15) + 'px'
-  /*elem.style.width = width + scroll + 'px'
-  elem.style.position = 'relative'
-  elem.style.margin = 'auto'
-  */
-  elem.textAlign = 'center'
-  elem.fontFamily = 'sans-serif'
-  elem.fontWeight =  'bold'
-  elem.textShadow = 'black 1px 1px 3px'
-  elem.paddingBottom = '.5em'
+  elem.style.position = 'absolute'
+  elem.style.top =  videoTop + scroll + 'px'
+  elem.style.left = videoLeft + 'px'
+  elem.style.backgroundColor = 'red'
 
 }
 function addCloseOnClick(messageElem) {
@@ -75,21 +64,13 @@ function addCloseOnClick(messageElem) {
 
 }
 
-function setupMessageButton() {
-   title = "heyrettttrretertertertertertreterttr"
+function setupMessageButton(title) {
+   title = "heyrettttrretertertertert ertreterttr"
    body = "friend"
-
-  // создать
-  var messageElem = createMessage(title, body)
-
-  // позиционировать
-  positionMessage(messageElem)
-
-  // добавить обработчик на закрытие
-  //addCloseOnClick(messageElem)
-
-  // вставить в документ
- // video = document.querySelector('video')
-  document.body.appendChild(messageElem)
-
+   var messageElem = createMessage(title)
+   positionMessage(messageElem)
+   video = document.querySelector('video')
+   parent = video.parentNode;
+   //текст поверх добавляем к родителю видеоы
+   parent.appendChild(messageElem)
 }
