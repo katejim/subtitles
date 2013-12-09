@@ -52,7 +52,8 @@ function handleFiles(files) {
           var r = new FileReader();
           r.onload = function(e) {
               contents = e.target.result;
-
+              testr = myText()
+              alert(testr)
           }
           r.readAsText(f);
        } else {
@@ -68,6 +69,19 @@ function myText(){
     var myReEnd = /\d{2}:\d{2}:\d{2},\d{3}$/mg
     while((tek = myReBegin.exec(contents)) != null)
               beginArray.push(tek)
+
+
+    /*for(i = 0;i < beginArray.length ; i++){
+        newbegin  = beginArray[i].split(/:/)
+        alert(newbegin)
+        /*last = newbegin[2].split(',')
+        beginArray[i] = last[1] + 10*last[0] + 60*newbegin[1]+3600*newbegin[0]
+        alert(beginArray[i])*/
+    //}*/
+    t = beginArray[0].split(":")
+    alert(t)
+
+
     while((tek = myReEnd.exec(contents)) != null)
               endArray.push(tek)
     //косяк в конце число надо убрать
@@ -177,43 +191,34 @@ matches = document.getElementsByTagName('video');
 var i = 0
 function setupMessageButton() {
 
-    var re = myText()
-    var end = myText2()
+    var begin = []
+    begin.push(10)
+    begin.push(20)
+    begin.push(30)
+    var end = []
+    end.push(20)
+    end.push(30)
+    end.push(40)
     var mytext = myText3()
-              //alert("mas" + re.length)
-    /*for(i  = 0; i < re.length; i +=1){
-        alert(matches[0].currentTime + "dgdf")
-        if(matches[0].currentTime >= re[i])
-            alert(re[i] + maches[0].currentTime + "asd")
-    }*/
-    //alert(matches[0].currentTime)
 
-    //alert("ttest" + window.test)
-   //i = i + 1
-   //title = "heyrettttrr  dsdf" + i
-    //alert("glob" + globtext)
-    //alert(beginArray[4])
    window.setInterval( function() {
        var now = matches[0].currentTime
-       alert(re[0].toTimeString())
-       for(i = 0; i < re.length; i++){
-           if(now >= re[i] && now <= end[i]){
-                alert(mytext[i] + now + re[i]+" " + end[i])
+       for(i = 0; i < begin.length; i++){
+
+           if(parseInt(now) >= begin[i] && parseInt(now) <= end[i]){
+                 //alert(parseInt(now) +" "+ begin[i]+" " + end[i] + " ")
                 title = mytext[i];
-                break;
+                var messageElem = createMessage(title)
+                 positionMessage(messageElem)
+                 //matches = document.querySelector('video')
+                 parent = matches[0].parentNode;
+                 //текст поверх добавляем к родителю видеоы
+                 parent.appendChild(messageElem)
+
            }
        }
 
    }, 1000);
-
-    var messageElem = createMessage(title)
-     positionMessage(messageElem)
-     //matches = document.querySelector('video')
-     parent = matches[0].parentNode;
-     //текст поверх добавляем к родителю видеоы
-     parent.appendChild(messageElem)
-
-
 }
 
 
