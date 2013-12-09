@@ -35,14 +35,15 @@ if (matches.length>0) {
         script.setAttribute("type", "text/javascript");
         script.innerHTML = data;
         document.getElementsByTagName("head")[0].appendChild(script);
-        //document.getElementsByTagName("video")[0].setAttribute("onplay", "myText()");
+
+        document.getElementsByTagName("video")[0].setAttribute("onplay", "setupMessageButton();");
         //title = textArray[3]
 
     }
     );
 
 }
- window.addEventListener('load', function() {
+ /*window.addEventListener('load', function() {
             //output = document.createElement('div'); // JS is enabled, so insert a div to put the captions into
 		    //output.id = 'caption'; // it has an id of caption
 		    //video = document.querySelector('video'); // and it's after the first video element
@@ -51,11 +52,12 @@ if (matches.length>0) {
             output = document.createElement('div'); // JS is enabled, so insert a div to put the captions into
 		    output.id = 'caption'; // it has an id of caption
      output.innerHTML = "hgfkhgfjg"
+
 		    video = document.querySelector('video'); // and it's after the first video element
-		    video.parentNode.appendChild(output);
+		   // video.parentNode.appendChild(output);
             video.addEventListener('timeupdate',setupMessageButton, true)
 }, false);
-
+*/
 function createInputButton(){
   var input = document.createElement('input')
   input.innerHTML = '<input id = "uniq" class="my-message-ok" type="file" onchange="handleFiles(this.files)" /> '
@@ -84,46 +86,3 @@ function positionMessage(elem) {
   elem.style.width = width
 
 }
-
-function createMessage(title) {
-
-  var container = document.createElement('div')
-  container.innerHTML = '<div > \
-    <p style= "font-size:25px; text-align: center;" >'+title+' </p> \
-  </div>'
-  return container.firstChild
-}
-
-function positionMessage(elem) {
-  elem.style.position = 'absolute'
-  elem.style.top =  20 +  'px'
-
-  elem.style.left = 20 +'px'
-  elem.style.backgroundColor = 'red'
-  rect = matches[0].getBoundingClientRect()
-  width = (rect.right - rect.left) - 40 + 'px'
-  elem.style.width = width
-
-}
-
-matches = document.getElementsByTagName('video');
-var i = 0
-function setupMessageButton() {
-    //alert("ttest" + window.test)
-   i = i + 1
-   title = "heyrettttrr  dsdf" + i
-    //alert("glob" + globtext)
-   var messageElem = createMessage(title)
-   positionMessage(messageElem)
-   //matches = document.querySelector('video')
-   parent = matches[0].parentNode;
-   //текст поверх добавляем к родителю видеоы
-   parent.appendChild(messageElem)
-    //alert(beginArray[4])
-
-    var ui = myText()
-    alert("sfd" + ui)
-
-}
-
-
