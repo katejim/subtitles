@@ -1,3 +1,4 @@
+
 function onRequest(request, sender, sendResponse) {
   var url = "infobar.html#" + request.count;
   chrome.infobars.show({

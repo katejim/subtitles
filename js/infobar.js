@@ -9,3 +9,5 @@ if (count) {
   var domcount = document.querySelector('#count');
   domcount.innerText = count;
 }
+
+
