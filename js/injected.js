@@ -1,12 +1,16 @@
 /**
  * Created by KateKate on 24.11.13.
  */
+video = document.getElementsByTagName('video');
 var beginArray = []
 var endArray = []
 var textArray = []
 contents = ""
+var output = ""
+var intervalID
+
+//загрузка файла разбивка на массивы
 function handleFiles(files) {
-   // alert("hgdgg")
        var f = files[0]
        if (f) {
           var r = new FileReader();
@@ -21,6 +25,7 @@ function handleFiles(files) {
        }
 }
 
+//парсинг субтитров
 function myText(){
     var myReBegin = /^\d{2}:\d{2}:\d{2},\d{3}/mg;
     var myReEnd = /\d{2}:\d{2}:\d{2},\d{3}$/mg
@@ -35,7 +40,7 @@ function myText(){
               var real = parseInt(k[2]) + parseInt(k[1])*60 + parseInt(k[0])*3600
               endArray.push(real + "." + k[3])
     }
-    //косяк в конце число надо убрать
+       //нулевой текст - пустой
     textArray = contents.split(/\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/)
     for(i = 0; i< textArray.length; i += 1){
         textArray[i] = textArray[i].replace(/[\r\n]/g, ' ')
@@ -45,86 +50,49 @@ function myText(){
 }
 
 
-
-video = document.querySelector('video');
-
-
-function createMessage(title) {
-  var container = document.createElement('div')
-  container.innerHTML = '<div > \
-    <p style= "font-size:25px; text-align: center;" >'+title+' </p> \
-  </div>'
-  return container.firstChild
-}
-
-
+//настройка расположения блока субтитров
 function positionMessage(elem) {
   elem.style.position = 'absolute'
   elem.style.top =  20 +  'px'
-
   elem.style.left = 20 +'px'
-  elem.style.backgroundColor = 'red'
-  rect = matches[0].getBoundingClientRect()
-  width = (rect.right - rect.left) - 40 + 'px'
+  rect = video[0].getBoundingClientRect()
+  width = (rect.right - rect.left)  - 40 + 'px'
   elem.style.width = width
-
 }
 
-function createMessage(title) {
 
-  var container = document.createElement('div')
-  container.innerHTML = '<div > \
-    <p style= "font-size:25px; text-align: center;" >'+title+' </p> \
-  </div>'
-  return container.firstChild
-}
-
-function positionMessage(elem) {
-
-   elem.style.position = 'absolute'
-  elem.style.top =  20 +  'px'
-
-  elem.style.left = 20 +'px'
-  elem.style.backgroundColor = 'red'
-  rect = matches[0].getBoundingClientRect()
-  width = (rect.right - rect.left) - 40 + 'px'
-  elem.style.width = width
-
-}
-
-matches = document.getElementsByTagName('video');
-var i = 0
-function setupMessageButton() {
-    /*var begin = []
-    begin.push(10)
-    begin.push(20)
-    begin.push(30)
-    var end = []
-    end.push(20)
-    end.push(30)
-    end.push(40)*/
-
-
-
-   window.setInterval( function() {
-       var now = matches[0].currentTime
+//событие при воспроизведение
+function onPlay() {
+   if(output == ""){
+       output = document.createElement('div'); // JS is enabled, so insert a div to put the captions into
+       positionMessage(output)
+       parent = video[0].parentNode
+       parent.appendChild(output)
+   }
+   intervalID = window.setInterval( function() {
+       var now = video[0].currentTime
        for(i = 0; i < beginArray.length; i++){
-           // alert(now + " " + beginArray[i] + " " +endArray[i])
+           //придумать красивый алгоритм поиска интервала
            if(parseFloat(now) >= parseFloat(beginArray[i]) && parseFloat(now) <= parseFloat(endArray[i])){
-                title = textArray[i];
-                var messageElem = createMessage(title)
-                 positionMessage(messageElem)
-                 //matches = document.querySelector('video')
-                 parent = matches[0].parentNode;
-                 //текст поверх добавляем к родителю видеоы
-                 parent.appendChild(messageElem)
-
+                 output.innerHTML =  '<div > \
+                    <p style= "font-size:25px; text-align: center; text-shadow: black 1px 1px 3px;" >'+textArray[i + 1]+ '</p> \
+                  </div>'
+                 break
            }
+           else output.innerHTML = ""
        }
-
    }, 1000);
 }
 
+//событие при изменение размера экрана
+function onResize(){
+    output.innerHTML = ""
+    positionMessage(output)
+}
+//событие при паузе, остновке, ошибке, конце файла
+function onPauseStopEndError(){
+    clearInterval(intervalID)
+}
 
 
 
