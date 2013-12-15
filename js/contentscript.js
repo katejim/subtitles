@@ -33,10 +33,10 @@ function getUppoadCurTime(playerID){
 }*/
 
 matches = document.getElementsByTagName('video');
-
-if (matches.length>0) {
-    addMyFunctionToPage()
+if ((matches.length>0)) {
+   addMyFunctionToPage()
 }
+
 
 function addMyFunctionToPage(){
     $.get(chrome.extension.getURL('/js/injected.js'),
@@ -45,12 +45,11 @@ function addMyFunctionToPage(){
             script.setAttribute("type", "text/javascript");
             script.innerHTML = data;
             document.getElementsByTagName("head")[0].appendChild(script);
+            document.getElementsByTagName("body")[0].setAttribute("onLoad", "addButton()");
 
-            document.getElementsByTagName("body")[0].setAttribute("onLoad", "addButton();");
             matches[0].setAttribute("onplaying", "onPlay();");
             //изменение размеров видео
             document.getElementsByTagName("body")[0].setAttribute("onresize", "onResize();");
-
             //событие при паузе
             matches[0].setAttribute("onpause", "onPauseStopEndError();");
             //событие при окончание файла
@@ -59,7 +58,7 @@ function addMyFunctionToPage(){
             matches[0].setAttribute("onended", "onPauseStopEndError();");
             //событие при ошибки загрузки
             matches[0].setAttribute("onemptied", "onPauseStopEndError();");
-            alert("yes")
+           // alert("yes")
         }
     );
 }

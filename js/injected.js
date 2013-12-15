@@ -60,7 +60,7 @@ function positionMessage(elem) {
   elem.style.width = width
 }
 
-
+ var  forwardOffset = 0
 //событие при воспроизведение
 function onPlay() {
    if(output == ""){
@@ -70,12 +70,12 @@ function onPlay() {
        parent.appendChild(output)
    }
    intervalID = window.setInterval( function() {
+
        var now = video[0].currentTime
        for(i = 0; i < beginArray.length; i++){
-           //придумать красивый алгоритм поиска интервала
-           if(parseFloat(now) >= parseFloat(beginArray[i]) && parseFloat(now) <= parseFloat(endArray[i])){
+           if((parseFloat(now) + parseFloat(forwardOffset)) >= parseFloat(beginArray[i]) && (parseFloat(now) + parseFloat(forwardOffset)) <= parseFloat(endArray[i])){
                  output.innerHTML =  '<div > \
-                    <p style= "font-size:25px; text-align: center; text-shadow: black 1px 1px 3px;" >'+textArray[i + 1]+ '</p> \
+                    <p style= "font-size:25px; text-align: center; text-shadow: black 1px 1px 3px;" >'+textArray[i + 1] + '</p> \
                   </div>'
                  break
            }
@@ -94,6 +94,61 @@ function onPauseStopEndError(){
     clearInterval(intervalID)
 }
 
+function increaseTemp(){
+   forwardOffset  = forwardOffset + 0.1
+}
+
+function decreaseTemp(){
+   forwardOffset  = forwardOffset - 0.1
+}
+
+
+var toolbar = ""
+function createToolBar(){
+    toolbar = document.createElement('table')
+    toolbar.id = "uniqToolBar"
+    toolbar.innerHTML =  '<table  border="6" align = "center"> \
+                          <tr>\
+                              <td width = "25%" align = "right">\
+                                <input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/> \
+                              </td>\
+                              <td width  = "25%" align = "right"> \
+                                <input type = "button" value = "вперед"onclick="increaseTemp()" />\
+                              </td>\
+                              <td width  = "25%" align = "left">\
+                                <input type = "button" value = "назад" onclick="decreaseTemp()"/>  \
+                              </td>\
+                              <td width  = "25%" align = "center">\
+                                   <input type = "button" value = "закрыть" onclick="closeToolBar()"/> \
+                              </td>\
+                          </tr>\
+                        </table>'
+}
+
+function positionMessage2(elem) {
+  elem.style.position = 'fixed'
+  elem.style.top =  0 + 'px'
+  elem.style.left = 0 +'px'
+  elem.style.backgroundColor = 'red'
+  elem.style.opacity = '0.85'
+  elem.style.width = 100 + '%'
+  elem.style.height = 7 + '%'
+}
+
+function addButton(){
+    createToolBar()
+    positionMessage2(toolbar)
+    document.body.appendChild(toolbar)
+}
+
+function closeToolBar(){
+    toolbar.style.display = "none"
+}
+
+function openToolBar(){
+    alert("ata")
+}
+
 //to uppoad
 /*object = document.getElementsByTagName('object');
 objectId = object[0].id
@@ -106,43 +161,6 @@ function my(){
     }
 
 }*/
-
-
-
-var toolbar = ""
-function createInputButton(){
-  //var input = document.createElement('input')
-  //input.innerHTML = '<input id = "uniq" class="my-message-ok" type="file" onchange="handleFiles(this.files)" /> '
-    toolbar = document.createElement('div')
-    toolbar.innerHTML =  '<div > \
-                     <input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)" />\
-                     <button onclick="closeToolBar()"/> закрыть </button/>\
-                  </div>'
-    //return toolbar.firstChild
-}
-
-
-
-function addButton(){
-    createInputButton()
-    positionMessage2(toolbar)
-    document.body.appendChild(toolbar)
-}
-
-function closeToolBar(){
-    toolbar.style.display = "none"
-}
-
-//стиль для ручного инфобара
-function positionMessage2(elem) {
-  elem.style.position = 'fixed'
-  elem.style.top =  0 + 'px'
-  elem.style.left = 0 +'px'
-  elem.style.backgroundColor = 'red'
-  elem.style.width = 100 + '%'
-  elem.style.height = 7 + '%'
-}
-
 
 
 /*window.onclick=function(e){
