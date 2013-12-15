@@ -94,6 +94,58 @@ function onPauseStopEndError(){
     clearInterval(intervalID)
 }
 
+//to uppoad
+/*object = document.getElementsByTagName('object');
+objectId = object[0].id
+function my(){
+    alert(object.length)
+    for(i = 0; i < object.length; i++){
+        alert(object[i].id)
+     k = uppodGet(object[i].id,'getime')
+        alert("time" + " " + k)
+    }
+
+}*/
 
 
 
+var toolbar = ""
+function createInputButton(){
+  //var input = document.createElement('input')
+  //input.innerHTML = '<input id = "uniq" class="my-message-ok" type="file" onchange="handleFiles(this.files)" /> '
+    toolbar = document.createElement('div')
+    toolbar.innerHTML =  '<div > \
+                     <input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)" />\
+                     <button onclick="closeToolBar()"/> закрыть </button/>\
+                  </div>'
+    //return toolbar.firstChild
+}
+
+
+
+function addButton(){
+    createInputButton()
+    positionMessage2(toolbar)
+    document.body.appendChild(toolbar)
+}
+
+function closeToolBar(){
+    toolbar.style.display = "none"
+}
+
+//стиль для ручного инфобара
+function positionMessage2(elem) {
+  elem.style.position = 'fixed'
+  elem.style.top =  0 + 'px'
+  elem.style.left = 0 +'px'
+  elem.style.backgroundColor = 'red'
+  elem.style.width = 100 + '%'
+  elem.style.height = 7 + '%'
+}
+
+
+
+/*window.onclick=function(e){
+  var elem = e ? e.target : window.event.srcElement;
+  alert(elem.id)
+}*/

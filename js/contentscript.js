@@ -14,12 +14,27 @@
         alert(captions[0]["begin"])*/
         //createInputButton
         //кнопка для загрузки
+/*object = document.getElementsByTagName('object');
+objectId = object[0].id
+alert("find")
+if(object.length > 0){
+   addButton()
+    addMyFunctionToPage()
 
+}
+
+
+function getMovie(idMovie) {
+    var M$ =  document[idMovie]
+    return (M$ ? document : window)[idMovie]
+}
+function getUppoadCurTime(playerID){
+    return
+}*/
 
 matches = document.getElementsByTagName('video');
+
 if (matches.length>0) {
-    addButton()
-    //injected code
     addMyFunctionToPage()
 }
 
@@ -30,9 +45,12 @@ function addMyFunctionToPage(){
             script.setAttribute("type", "text/javascript");
             script.innerHTML = data;
             document.getElementsByTagName("head")[0].appendChild(script);
+
+            document.getElementsByTagName("body")[0].setAttribute("onLoad", "addButton();");
             matches[0].setAttribute("onplaying", "onPlay();");
             //изменение размеров видео
             document.getElementsByTagName("body")[0].setAttribute("onresize", "onResize();");
+
             //событие при паузе
             matches[0].setAttribute("onpause", "onPauseStopEndError();");
             //событие при окончание файла
@@ -41,28 +59,13 @@ function addMyFunctionToPage(){
             matches[0].setAttribute("onended", "onPauseStopEndError();");
             //событие при ошибки загрузки
             matches[0].setAttribute("onemptied", "onPauseStopEndError();");
+            alert("yes")
         }
     );
 }
-
-function createInputButton(){
-  var input = document.createElement('input')
-  input.innerHTML = '<input id = "uniq" class="my-message-ok" type="file" onchange="handleFiles(this.files)" /> '
-  return input.firstChild
-}
-
-function addButton(){
-    myb = createInputButton()
-    positionMessage(myb)
-    document.body.appendChild(myb)
-}
-//стиль для ручного инфобара
-function positionMessage(elem) {
-  elem.style.position = 'absolute'
-  elem.style.top =  20 +  'px'
-  elem.style.left = 20 +'px'
-  elem.style.backgroundColor = 'red'
-  rect = matches[0].getBoundingClientRect()
-  width = (rect.right - rect.left) - 40 + 'px'
-  elem.style.width = width
-}
+//создать красивую тулбр
+//кнопка на ее закрытие
+// прозрачность, красиво слово Sybtitles on top - png картинка
+// иконку.
+//иконку слева, которая ищет видео принудительно и выовди тулбар, если найдена
+//uppoad?
