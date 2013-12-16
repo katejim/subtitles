@@ -145,9 +145,6 @@ function closeToolBar(){
     toolbar.style.display = "none"
 }
 
-function openToolBar(){
-    alert("ata")
-}
 
 //to uppoad
 /*object = document.getElementsByTagName('object');
