@@ -31,6 +31,66 @@ function getMovie(idMovie) {
 function getUppoadCurTime(playerID){
     return
 }*/
+embed = document.getElementsByTagName('embed')
+var vk  = 0
+if(embed.length > 0){
+    but = document.createElement('div')
+    but.innerHTML = '<input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/>'
+    var b = document.getElementById('mv_description')
+    alert(b.id)
+    b.appendChild(but)
+    workWithVk()
+    vk = 1
+
+}
+function workWithVk(){
+    at = embed[0].attributes
+    flashVars = ""
+    var arr = []
+    for (var key in at) {
+        if(at[key].name == 'flashvars'){
+            flashVars = at[key].value
+            break
+        }
+
+    }
+
+    var host = /host=\d{1,}/
+    var myHost = host.exec(flashVars)
+
+    var uid = /uid=\d{1,}/
+    var myUid = uid.exec(flashVars)
+
+    var vtag = /vtag=.*/
+    var myVtag = vtag.exec(flashVars)
+    rezUrl = "http://cs" + myHost[0].substring(5) + ".vk.com/u" + myUid[0].substring(4) + "/videos/" + myVtag[0].substring(5) +".480.mov"
+    alert(rezUrl)
+    var width = embed[0].width
+    var height = embed[0].height
+
+
+    var vkVideo = ""
+    vkVideo = document.createElement('video')
+    vkVideo.width = width
+    vkVideo.height = height
+    vkVideo.controls = true
+    vkVideo.autoplay = true
+    vkVideo.src = rezUrl
+    vkVideo.type =  "video/mp4"
+        //vkVideo.innerHTML = '<video width = "720" height = "410" controls autoplay name="media" > </video> '
+    //vkVideo2 = document.createElement('source')
+   // vkVideo2.src = rezUrl
+    //vkVideo2.type =
+   // vkVideo.appendChild(vkVideo2)
+    parent = embed[0].parentNode
+    parent.removeChild(embed[0])
+
+    parent.appendChild(vkVideo)
+
+
+
+}
+
 
 matches = document.getElementsByTagName('video');
 if ((matches.length>0)) {
@@ -45,7 +105,10 @@ function addMyFunctionToPage(){
             script.setAttribute("type", "text/javascript");
             script.innerHTML = data;
             document.getElementsByTagName("head")[0].appendChild(script);
-            document.getElementsByTagName("body")[0].setAttribute("onLoad", "addButton()");
+
+            if (vk == 0)
+                document.getElementsByTagName("body")[0].setAttribute("onLoad", "addButton()");
+
 
             matches[0].setAttribute("onplaying", "onPlay();");
             //изменение размеров видео

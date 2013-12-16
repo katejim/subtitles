@@ -53,7 +53,7 @@ function myText(){
 //настройка расположения блока субтитров
 function positionMessage(elem) {
   elem.style.position = 'absolute'
-  elem.style.top =  20 +  'px'
+  elem.style.top =  25 +  'px'
   elem.style.left = 20 +'px'
   rect = video[0].getBoundingClientRect()
   width = (rect.right - rect.left)  - 40 + 'px'
@@ -75,7 +75,7 @@ function onPlay() {
        for(i = 0; i < beginArray.length; i++){
            if((parseFloat(now) + parseFloat(forwardOffset)) >= parseFloat(beginArray[i]) && (parseFloat(now) + parseFloat(forwardOffset)) <= parseFloat(endArray[i])){
                  output.innerHTML =  '<div > \
-                    <p style= "font-size:25px; text-align: center; text-shadow: black 1px 1px 3px;" >'+textArray[i + 1] + '</p> \
+                    <p style= "font-size:25px; text-align: center; text-shadow: black 1px 1px 3px;color:white;" >'+textArray[i + 1] + '</p> \
                   </div>'
                  break
            }
@@ -102,6 +102,10 @@ function decreaseTemp(){
    forwardOffset  = forwardOffset - 0.1
 }
 
+function insertAfter(elem, refElem) {
+    while (refElem.nodeType!=1) refElem = refElem.nextSibling;
+    return refElem.parentNode.insertBefore(elem, refElem.nextSibling);
+  }
 
 var toolbar = ""
 function createToolBar(){
@@ -139,6 +143,10 @@ function addButton(){
     createToolBar()
     positionMessage2(toolbar)
     document.body.appendChild(toolbar)
+}
+
+function addButtonVk(){
+
 }
 
 function closeToolBar(){

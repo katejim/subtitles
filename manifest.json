@@ -21,7 +21,7 @@
     }
   ],
    "web_accessible_resources": [
-    "js/injected.js"
+    "js/injected.js" ,"js/injectedVk.js","js/swfobject.js, player.swf"
   ],
   "browser_action" : {
 			"default_title" : "Hello Word",
