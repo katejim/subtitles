@@ -8,9 +8,9 @@
   },
   "permissions" : [  "activeTab" ],
   "icons" : {
-    "16" : "sandwich-16.png",
-    "48" : "sandwich-48.png",
-    "128" : "sandwich-128.png"
+    "16" : "logo1.png",
+    "48" : "logo1.png",
+    "128" : "logo1.png"
   },
   "content_scripts" : [
     {
@@ -21,11 +21,11 @@
     }
   ],
    "web_accessible_resources": [
-    "js/injected.js" ,"js/injectedVk.js","js/swfobject.js, player.swf"
+    "js/injected.js" ,"js/injectedVk.js","js/swfobject.js", "player.swf"
   ],
   "browser_action" : {
 			"default_title" : "Hello Word",
-			"default_icon" : "sandwich-16.png" // Путь до иконки которая будет отображаться рядом со строкой Адреса
+			"default_icon" : "logo2.png" // Путь до иконки которая будет отображаться рядом со строкой Адреса
 			//"default_popup" : "popup.html" // Путь для контента, который будет отображаться при "Клике" по Иконке
 		},
   "manifest_version": 2

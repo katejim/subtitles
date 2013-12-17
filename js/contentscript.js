@@ -32,18 +32,20 @@ function getUppoadCurTime(playerID){
     return
 }*/
 embed = document.getElementsByTagName('embed')
+
 var vk  = 0
 if(embed.length > 0){
-    but = document.createElement('div')
-    but.innerHTML = '<input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/>'
-    var b = document.getElementById('mv_description')
-    alert(b.id)
-    b.appendChild(but)
-    workWithVk()
-    vk = 1
+    if(embed[0].id == "video_player"){
+        but = document.createElement('div')
+        but.innerHTML = '<input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/>'
+        var b = document.getElementById('mv_description')
+        b.appendChild(but)
+        workWithVk()
+        vk = 1
 
+    }
 }
-function workWithVk(){
+function getDirectUrl(){
     at = embed[0].attributes
     flashVars = ""
     var arr = []
@@ -64,7 +66,13 @@ function workWithVk(){
     var vtag = /vtag=.*/
     var myVtag = vtag.exec(flashVars)
     rezUrl = "http://cs" + myHost[0].substring(5) + ".vk.com/u" + myUid[0].substring(4) + "/videos/" + myVtag[0].substring(5) +".480.mov"
-    alert(rezUrl)
+
+    return rezUrl
+}
+function workWithVk(){
+
+    rezUrl = getDirectUrl()
+
     var width = embed[0].width
     var height = embed[0].height
 
@@ -75,25 +83,20 @@ function workWithVk(){
     vkVideo.height = height
     vkVideo.controls = true
     vkVideo.autoplay = true
-    vkVideo.src = rezUrl
-    vkVideo.type =  "video/mp4"
-        //vkVideo.innerHTML = '<video width = "720" height = "410" controls autoplay name="media" > </video> '
-    //vkVideo2 = document.createElement('source')
-   // vkVideo2.src = rezUrl
-    //vkVideo2.type =
-   // vkVideo.appendChild(vkVideo2)
+        
+    vkVideo2 = document.createElement('source')
+    vkVideo2.src = rezUrl
+    vkVideo2.type = "video/mp4"
+    vkVideo.appendChild(vkVideo2)
     parent = embed[0].parentNode
     parent.removeChild(embed[0])
 
     parent.appendChild(vkVideo)
-
-
-
 }
 
 
 matches = document.getElementsByTagName('video');
-if ((matches.length>0)) {
+if ((matches.length>0)) {   
    addMyFunctionToPage()
 }
 

@@ -14,8 +14,10 @@
     alert(parent.id)*/
 
 //Указываем расположение плеера и его ширину и высоту
-function my(){
-  var so = new SWFObject('/swf/video.swf?18','mpl','400','319','9');
+//Указываем расположение плеера и его ширину и высоту
+
+var player = chrome.extension.getURL('player.swf');
+var so = new SWFObject('chrome-extension://dnahpnbeljpbhaadcbfakablbjlkmldh/player.swf','mpl','400','319','9');
   so.addParam('allowfullscreen','true');
   so.addParam('allowscriptaccess','always');
   so.addParam('wmode','opaque');
@@ -23,6 +25,6 @@ function my(){
   //Путь к видео-файлу
   so.addVariable('file','http://content.longtailvideo.com/videos/flvplayer.flv');
 
-  //Вписываем окно плеера в div с id "mediaspace"
+  //Вписываем окно  var player = chrome.extension.getURL('player.swf');плеера в div с id "mediaspace"
+
   so.write('video_box_wrap3195849_167563766');
-}

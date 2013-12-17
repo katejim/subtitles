@@ -17,6 +17,7 @@ function handleFiles(files) {
           r.onload = function(e) {
               contents = e.target.result;
               myText()
+              //my()
 
           }
           r.readAsText(f);
@@ -24,6 +25,7 @@ function handleFiles(files) {
           alert("Failed to load your subs");
        }
 }
+
 
 //парсинг субтитров
 function myText(){
@@ -44,7 +46,7 @@ function myText(){
     textArray = contents.split(/\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/)
     for(i = 0; i< textArray.length; i += 1){
         textArray[i] = textArray[i].replace(/[\r\n]/g, ' ')
-        textArray[i] = textArray[i].substr(0,textArray[i].length - 5)
+        textArray[i] = textArray[i].substr(0,textArray[i].length - 6)
     }
     return beginArray
 }
@@ -56,7 +58,7 @@ function positionMessage(elem) {
   elem.style.top =  25 +  'px'
   elem.style.left = 20 +'px'
   rect = video[0].getBoundingClientRect()
-  width = (rect.right - rect.left)  - 40 + 'px'
+  width = (rect.right - rect.left)  - 20 + 'px'
   elem.style.width = width
 }
 
@@ -95,11 +97,11 @@ function onPauseStopEndError(){
 }
 
 function increaseTemp(){
-   forwardOffset  = forwardOffset + 0.1
+   forwardOffset  = forwardOffset + 0.4
 }
 
 function decreaseTemp(){
-   forwardOffset  = forwardOffset - 0.1
+   forwardOffset  = forwardOffset - 0.4
 }
 
 function insertAfter(elem, refElem) {
@@ -109,21 +111,30 @@ function insertAfter(elem, refElem) {
 
 var toolbar = ""
 function createToolBar(){
+    butStyle = 'background: #2E69E3; \
+background: -moz-linear-gradient(0% 100% 90deg, #2E69E3, #59C2FF);\
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#59C2FF),\
+to(#2E69E3));\
+box-shadow: inset 1px 1px 0 0 #004A7F;\
+-moz-box-shadow: inset 1px 1px 0 0 #004A7F;\
+-webkit-box-shadow: inset 1px 1px 0 0 #004A7F;\
+padding: 8px 29px 6px 31px;'
+
     toolbar = document.createElement('table')
     toolbar.id = "uniqToolBar"
     toolbar.innerHTML =  '<table  border="6" align = "center"> \
                           <tr>\
                               <td width = "25%" align = "right">\
-                                <input id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/> \
+                                <input style = " background: #2E8CE3;    padding: 7px 30px;    font-size: 15px;    font-weight: bold;    color: #FFFFFF;    text-align: center;    border: solid 1px #73C8F0;    cursor: pointer;" id = "mytool" class="my-message-ok" type="file" onchange="handleFiles(this.files)"/> \
                               </td>\
-                              <td width  = "25%" align = "right"> \
-                                <input type = "button" value = "вперед"onclick="increaseTemp()" />\
+                              <td width  = "25%" align = "right">\
+                                <input style = " background: #2E8CE3;    padding: 7px 30px;    font-size: 15px;    font-weight: bold;    color: #FFFFFF;    text-align: center;    border: solid 1px #73C8F0;    cursor: pointer;" type = "button" value = "назад" onclick="decreaseTemp()"/>  \
                               </td>\
-                              <td width  = "25%" align = "left">\
-                                <input type = "button" value = "назад" onclick="decreaseTemp()"/>  \
+                              <td width  = "25%" align = "left"> \
+                                <input style = " background: #2E8CE3;    padding: 7px 30px;    font-size: 15px;    font-weight: bold;    color: #FFFFFF;    text-align: center;    border: solid 1px #73C8F0;    cursor: pointer;" type = "button" value = "вперед"onclick="increaseTemp()" />\
                               </td>\
                               <td width  = "25%" align = "center">\
-                                   <input type = "button" value = "закрыть" onclick="closeToolBar()"/> \
+                                   <input style = " background: #2E8CE3;    padding: 7px 30px;    font-size: 15px;    font-weight: bold;    color: #FFFFFF;    text-align: center;    border: solid 1px #73C8F0;    cursor: pointer;" type = "button" value = "закрыть" onclick="closeToolBar()"/> \
                               </td>\
                           </tr>\
                         </table>'
@@ -133,8 +144,8 @@ function positionMessage2(elem) {
   elem.style.position = 'fixed'
   elem.style.top =  0 + 'px'
   elem.style.left = 0 +'px'
-  elem.style.backgroundColor = 'red'
-  elem.style.opacity = '0.85'
+  elem.style.backgroundColor = '#0000CD'
+  elem.style.opacity = '0.9'
   elem.style.width = 100 + '%'
   elem.style.height = 7 + '%'
 }
