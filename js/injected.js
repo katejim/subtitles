@@ -62,6 +62,16 @@ function positionMessage(elem) {
   elem.style.width = width
 }
 
+
+function positionMessageOnResize(elem) {
+  elem.style.position = 'absolute'
+  elem.style.top =  50 +  'px'
+  elem.style.left = 20 +'px'
+  rect = video[0].getBoundingClientRect()
+  width = (rect.right - rect.left) + 10 +'px'
+  elem.style.width = width
+}
+
  var  forwardOffset = 0
 //событие при воспроизведение
 function onPlay() {
@@ -89,7 +99,7 @@ function onPlay() {
 //событие при изменение размера экрана
 function onResize(){
     output.innerHTML = ""
-    positionMessage(output)
+    positionMessageOnResize(output)
 }
 //событие при паузе, остновке, ошибке, конце файла
 function onPauseStopEndError(){
