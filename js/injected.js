@@ -55,20 +55,10 @@ function myText(){
 //настройка расположения блока субтитров
 function positionMessage(elem) {
   elem.style.position = 'absolute'
-  elem.style.top =  25 +  'px'
+  elem.style.top =  35 +  'px'
   elem.style.left = 20 +'px'
   rect = video[0].getBoundingClientRect()
   width = (rect.right - rect.left)  - 20 + 'px'
-  elem.style.width = width
-}
-
-
-function positionMessageOnResize(elem) {
-  elem.style.position = 'absolute'
-  elem.style.top =  50 +  'px'
-  elem.style.left = 20 +'px'
-  rect = video[0].getBoundingClientRect()
-  width = (rect.right - rect.left) + 10 +'px'
   elem.style.width = width
 }
 
@@ -99,7 +89,7 @@ function onPlay() {
 //событие при изменение размера экрана
 function onResize(){
     output.innerHTML = ""
-    positionMessageOnResize(output)
+    positionMessage(output)
 }
 //событие при паузе, остновке, ошибке, конце файла
 function onPauseStopEndError(){

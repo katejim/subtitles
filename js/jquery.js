@@ -954,7 +954,7 @@ jQuery.extend({
 				iCallback = function( index ) {
 					return function( value ) {
 						array[ index ] = arguments.length > 1 ? slice.call( arguments, 0 ) : value;
-						if ( !( --count ) ) {
+						if ( !( --countResize ) ) {
 							deferred.resolveWith( promise, array );
 						}
 					};
@@ -964,10 +964,10 @@ jQuery.extend({
 				if ( object && jQuery.isFunction( object.promise ) ) {
 					object.promise().then( iCallback(lastIndex), deferred.reject );
 				} else {
-					--count;
+					--countResize;
 				}
 			}
-			if ( !count ) {
+			if ( !countResize ) {
 				deferred.resolveWith( promise, array );
 			}
 		} else if ( deferred !== object ) {
@@ -4061,7 +4061,7 @@ var Expr = Sizzle.selectors = {
 						
 						for ( node = parent.firstChild; node; node = node.nextSibling ) {
 							if ( node.nodeType === 1 ) {
-								node.nodeIndex = ++count;
+								node.nodeIndex = ++countResize;
 							}
 						} 
 
