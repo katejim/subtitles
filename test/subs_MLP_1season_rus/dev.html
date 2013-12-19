@@ -1,0 +1,64 @@
+<html>
+ 
+<head>
+ 
+<script>
+function hide_show()
+{
+    //Получаем стиль блока с айди div (для изменения)
+    var div=document.getElementById("div").style.display;
+    //Получаем стиль ссылки (для изменения)
+    var link=document.getElementById("link").innerHTML;
+ 
+    //Изначально стиль display у блока равен ""
+    //так как он изначально отображается
+    //задаем ему стиль block
+    if(div=="")div="none";
+ 
+    //Если блок не отображается
+    if(div=="none")
+    {
+        div="block";
+        link="Hide";
+    }
+    else
+    {
+        div="none";
+        link="Show";
+    }
+    //Теперь меняем стили у ссылки
+    //и блока который хотим скрыть или показать
+    document.getElementById("div").style.display=div;
+    document.getElementById("link").innerHTML=link;
+}
+</script>
+ 
+<style>
+#div{
+    width:200px;
+    height:200px;
+    background:orange;
+    display:none;
+}
+#link{
+    cursor:pointer;
+    background:silver;
+    padding:5px;
+    float:left;
+}
+#link:hover
+{
+    background:yellow;
+}
+</style>
+ 
+</head>
+ 
+<div id="link" onClick="hide_show();">
+Shows
+</div>
+ 
+<div id="div">
+</div>
+ 
+</html>
