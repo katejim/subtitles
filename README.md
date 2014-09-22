@@ -1,7 +1,7 @@
 subtitles
 =========
 
-subs aunder all
+subs under all
 1. необходимо устаносить канал разработчика, для этого можно сказать chrome с dev каналом под нужную ОС
     http://www.chromium.org/getting-involved/dev-channel
 2. после установки, открывает chrome, выбираем инструменты -> расширения -> загрузить распакованное расширение 
